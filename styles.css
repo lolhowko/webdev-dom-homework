@@ -176,7 +176,7 @@ body {
   animation: rotating 2s linear infinite;
 }
 
-#login-btn {
+.login-button {
   margin-top: 24px;
   font-size: 24px;
   padding: 10px 20px;
@@ -196,7 +196,8 @@ body {
 }
 
 .login-input,
-.password-input {
+.password-input,
+.login-name {
   padding: 20px 22px;
   font-size: 16px;
   font-family: Helvetica;
@@ -214,6 +215,14 @@ body {
   font-size: 18px;
   font-family: Helvetica;
   color: #fff;
+}
+
+.login-name {
+  margin-bottom: 12px;
+}
+
+.password-input {
+  margin-top: 12px;
 }
 
 .authorization {

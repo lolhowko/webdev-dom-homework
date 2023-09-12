@@ -5,19 +5,33 @@ import { renderComments } from "./renderComments.js";
 import { format } from "date-fns";
 
 
+//        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
+
+let comments = [];
+
+// const RUDate = Intl.DateTimeFormat();
+
+
+//      GET запрос
+
 const fetchAndRenderComments = () => {
     getComments().then((responseData) => {
 
         const appComments = responseData.comments.map((comment) => {
+            const createDate = format(
+                new Date(comment.date),
+                'yyyy-MM-dd hh.mm.ss',
+            );
             return {
                 name: comment.author.name,
 
-                date: new Date(comment.date),
+                date: createDate,
 
                 text: comment.text,
-                like: comment.likes,
 
+                like: comment.likes,
                 isLiked: false,
+
                 // isEdit: false,
                 // isLoading: false,
             };
@@ -25,13 +39,22 @@ const fetchAndRenderComments = () => {
 
         comments = appComments;
 
-        renderComments({ comments, fetchAndRenderComments });
+        renderComments({
+            comments,
+            fetchAndRenderComments,
+            name: window.userName,
+        });
 
         return true;
     })
 }
 
-renderLogin({ fetchAndRenderComments });
+fetchAndRenderComments();
+
+
+// renderLogin({ fetchAndRenderComments });
+
+
 
 //        ОБРАБОТЧИК на LIKES,  РЕАЛИЗАЦИЯ ЛАЙКОВ
 
@@ -126,13 +149,11 @@ export const initEditCommentListeners = () => {
 
 
 
-//        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ
-
-let comments = [];
 
 
-fetchAndRenderComments();
-renderComments({ comments, fetchAndRenderComments });
+
+
+// renderComments({ comments, fetchAndRenderComments });
 
 
 
