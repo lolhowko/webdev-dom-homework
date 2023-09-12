@@ -1,5 +1,6 @@
 const host = "https://wedev-api.sky.pro/api/v2/lana-olhowko/comments";
-const userURL = "https://wedev-api.sky.pro/api/user";
+const userURL =  'https://wedev-api.sky.pro/api/user/login';
+const userRegistr = 'https://wedev-api.sky.pro/api/user';
 
 export let token;
 
@@ -80,4 +81,17 @@ export function login({ login, password }) {
     .then((response) => {
       return response.json();
     })
+}
+
+export function register({ login, password, name }) {
+	return fetch(userRegistr, {
+		method: 'POST',
+		body: JSON.stringify({
+			login,
+			password,
+			name,
+		}),
+	}).then((response) => {
+		return response.json();
+	});
 }
