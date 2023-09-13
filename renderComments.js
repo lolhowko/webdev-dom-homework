@@ -1,5 +1,7 @@
 import { postComments, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
+import { comments, fetchAndRenderComments } from "./main.js";
+
 
 
 const listElement = document.getElementById("list");
@@ -111,7 +113,7 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
     initLikesButtonListeners(comments, fetchAndRenderComments, nameInputElement); // ЛАЙКИ initEventListeners
     initEditButtonListeners(comments, fetchAndRenderComments); // Редактирование коммента = functionEdit
 
-    initEditCommentListeners(); // ОТВЕТЫ на комменты
+    initEditCommentListeners(comments, fetchAndRenderComments); // ОТВЕТЫ на комменты
 }
 
 

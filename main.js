@@ -2,6 +2,8 @@ import { getComments } from "./api.js";
 import { renderComments } from "./renderComments.js";
 import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
+import { format } from "date-fns";
+
 
 //        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
 
@@ -12,7 +14,7 @@ export let comments = [];
 
 //      GET запрос
 
-const fetchAndRenderComments = () => {
+export const fetchAndRenderComments = () => {
     getComments().then((responseData) => {
 
         const appComments = responseData.comments.map((comment) => {
