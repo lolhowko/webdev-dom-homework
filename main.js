@@ -18,7 +18,23 @@ export const fetchAndRenderComments = () => {
     getComments().then((responseData) => {
 
         const appComments = responseData.comments.map((comment) => {
-            const createDate = formatDateToRu(new Date(comment.date));
+            //старый вариант
+            // const createDate = formatDateToRu(new Date(comment.date));
+
+            //новый вариант с HW 2.17
+            const createDate = format(
+                new Date(comment.date),
+                'yyyy-MM-dd hh.mm.ss',
+            );
+
+            // Теперь мы с легкостью можем указывать нужный нам формат даты, не переживая за реализацию:
+
+            // const now = new Date();
+            
+            // format(now, "dd/MM/yyyy hh:mm"); // 26/03/2023 10:33
+            // format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
+            // format(now, "dd.MM.yyyy hh:mm:ss"); // 26.03.2023 10:33:41
+
 
             return {
                 name: comment.author.name,

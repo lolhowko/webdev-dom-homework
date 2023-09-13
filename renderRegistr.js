@@ -2,7 +2,7 @@ import { register, setToken } from "./api.js";
 import { setName } from "./loginPage.js";
 
 
-export function renderRegister({ fetchAndRenderTasks }) {
+export function renderRegister({ fetchAndRenderComments }) {
 
     const appElement = document.getElementById('app');
 
