@@ -84,6 +84,7 @@ export function login({ login, password }) {
 }
 
 export function register({ login, password, name }) {
+
 	return fetch(userRegistr, {
 		method: 'POST',
 		body: JSON.stringify({

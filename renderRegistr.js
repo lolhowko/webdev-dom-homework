@@ -3,7 +3,9 @@ import { setName } from "./loginPage.js";
 
 
 export function renderRegister({ fetchAndRenderTasks }) {
+
     const appElement = document.getElementById('app');
+
     const loginHtml = `
 	<div class="container">
 	<div class="add-form">
@@ -30,12 +32,14 @@ export function renderRegister({ fetchAndRenderTasks }) {
 
     buttonLoginElement.addEventListener('click', () => {
         buttonLoginElement.disabled = true;
+
         register({
             login: loginInputElement.value,
             password: passwordInputElement.value,
             name: nameRegisterElement.value,
         })
             .then((responseData) => {
+
                 setToken(responseData.user.token);
 
                 localStorage.setItem('tokenSave', responseData.user.token);

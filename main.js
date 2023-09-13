@@ -1,11 +1,11 @@
 import { getComments } from "./api.js";
 import { renderComments } from "./renderComments.js";
-import { format } from "./date-fns";
+import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
 
 //        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
 
-let comments = [];
+export let comments = [];
 
 // const RUDate = Intl.DateTimeFormat();
 
@@ -16,10 +16,8 @@ const fetchAndRenderComments = () => {
     getComments().then((responseData) => {
 
         const appComments = responseData.comments.map((comment) => {
-            const createDate = format(
-                new Date(comment.date),
-                'yyyy-MM-dd hh.mm.ss',
-            );
+            const createDate = formatDateToRu(new Date(comment.date));
+
             return {
                 name: comment.author.name,
 
@@ -157,15 +155,15 @@ fetchAndRenderComments();
 
 // //       РЕАЛИЗАЦИЯ - КНОПКА УДАЛИТЬ
 
-const buttonDelComment = document.getElementById("del-comment");
+// const buttonDelComment = document.getElementById("del-comment");
 
 
-buttonDelComment.addEventListener('click', () => {
+// buttonDelComment.addEventListener('click', () => {
 
-    let lastComment = listElement.lastChild;
-    lastComment.parentNode.removeChild(lastComment);
+//     let lastComment = listElement.lastChild;
+//     lastComment.parentNode.removeChild(lastComment);
 
-})
+// })
 
 
 console.log("It works!");

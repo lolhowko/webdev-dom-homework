@@ -35,7 +35,8 @@ export const renderLogin = ({ fetchAndRenderComments }) => {
 
     registerElement?.addEventListener('click', (event) => {
         event.preventDefault();
-        renderRegister({ fetchAndRenderTasks });
+
+        renderRegister({ fetchAndRenderComments });
     });
 
 
@@ -45,7 +46,6 @@ export const renderLogin = ({ fetchAndRenderComments }) => {
     const passwordInputElement = document.getElementById("password-input");
 
     buttonLoginElement.addEventListener('click', () => {
-        console.log('1');
 
         login({
             login: loginInputElement.value,

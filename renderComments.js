@@ -1,6 +1,6 @@
 import { postComments, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
-import { initLikesButtonListeners, initEditButtonListeners, initEditCommentListeners } from "./main.js";
+// import { initLikesButtonListeners, initEditButtonListeners, initEditCommentListeners } from "./main.js";
 
 const listElement = document.getElementById("list");
 
@@ -84,8 +84,10 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
     appElement.innerHTML = appHTML;
 
     const authorizationElement = document.getElementById('authorization-link');
+
     authorizationElement?.addEventListener('click', (event) => {
         event.preventDefault();
+
         renderLogin({ comments, fetchAndRenderComments });
     });
 
@@ -220,7 +222,7 @@ function btnElementInit(buttonAddElement, commentInputElement, nameInputElement,
 //        ОБРАБОТЧИК на LIKES,  РЕАЛИЗАЦИЯ ЛАЙКОВ
 
 
-const initLikesButtonListeners = () => {
+const initLikesButtonListeners = (comments, fetchAndRenderComments) => {
 
     if (!token) return;
 
@@ -246,7 +248,7 @@ const initLikesButtonListeners = () => {
         });
 
         renderComments({ comments, fetchAndRenderComments });
-
+        
     }
 
 }
