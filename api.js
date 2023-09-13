@@ -4,12 +4,12 @@ const userRegistr = 'https://wedev-api.sky.pro/api/user';
 
 export let token;
 
+
 export const setToken = (newToken) => {
   token = newToken;
 }
 
-// let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-
+// GET запрос - получение 
 
 export function getComments() {
 
@@ -33,11 +33,13 @@ export function getComments() {
 }
 
 
+// запостить новый коммент
+
 export function postComments({ name, text }) {
   return fetch(host, {
     method: "POST",
     headers: {
-      Authorization: `Bearer &{token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: name.replaceAll("&", "&amp;")
@@ -69,6 +71,7 @@ export function postComments({ name, text }) {
     })
 }
 
+// ЗАЛОГИНИТЬСЯ для формы ВОЙТИ
 
 export function login({ login, password }) {
   return fetch(userURL, {
@@ -82,6 +85,8 @@ export function login({ login, password }) {
       return response.json();
     })
 }
+
+// ЗАРЕГАТЬСЯ для формы Зарегестрироваться
 
 export function register({ login, password, name }) {
 

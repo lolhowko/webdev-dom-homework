@@ -12,13 +12,13 @@ export function renderRegister({ fetchAndRenderTasks }) {
 		<h2 class="login-title">Форма регистрации</h2>
 
         <div class="form-row">
-        <input type="text" id="login-input" placeholder="Введите логин" value="" />
-        <input type="password" id="password-input" placeholder="Введите ваш пароль">
-		<input type="text" id="login-name" placeholder="Введите имя" value="" />
+        <input type="text" id="login-input"  class="add-form-registr" placeholder="Введите логин" value="" />
+        <input type="password" id="password-input"  class="add-form-registr" placeholder="Введите ваш пароль">
+		<input type="text" id="login-name"  class="add-form-registr" placeholder="Введите имя" value="" />
 
         </div>
 
-		<button id="login-button">Зарегистрироваться</button>
+		<button id="login-button" class="login-button">Зарегистрироваться</button>
 		<a class="login-link" href="index.html">Войти</a>
 	</div> 
 	`;
@@ -47,7 +47,7 @@ export function renderRegister({ fetchAndRenderTasks }) {
                 setName(responseData.user.name);
             })
             .then(() => {
-                fetchAndRenderTasks();
+                fetchAndRenderComments();
             });
     });
 }

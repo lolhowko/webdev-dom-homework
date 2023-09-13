@@ -15,14 +15,14 @@ export const renderLogin = ({ fetchAndRenderComments }) => {
             <h2 class="login-title">Форма входа</h2>
             
             <div class="form-row">
-            <input type="text" id="login-input" placeholder="Введите логин" value="" />
-            <input type="password" id="password-input" placeholder="Введите ваш пароль">
+            <input type="text" id="login-input" class="add-form-login" placeholder="Введите логин" value="" />
+            <input type="password" id="password-input" class="add-form-login" placeholder="Введите ваш пароль">
             </div>
 
-            <button id="login-button">Войти</button>
-            // <a class="login-link" href="index.html">Перейти на стр комментариев</a>
+            <button id="login-button" class="login-button">Войти</button>
+            <a class="login-link" href="index.html">Перейти на стр комментариев</a>
 
-            <a id="register-link" class="login-link href="#">Зарегистрироваться</a>
+            <a id="register-link" class="login-link" href="#">Зарегистрироваться</a>
 
 	    </div>
     </div>

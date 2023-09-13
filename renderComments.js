@@ -1,6 +1,6 @@
 import { postComments, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
-// import { initLikesButtonListeners, initEditButtonListeners, initEditCommentListeners } from "./main.js";
+
 
 const listElement = document.getElementById("list");
 
@@ -17,6 +17,7 @@ const listElement = document.getElementById("list");
 // }
 
 
+// рендер всех комментов + объявление const
 
 export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
     const commentsHtml = comments
@@ -71,7 +72,7 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
                         </div>
                 </div>`
 
-            : `<div class="authorization">Чтобы добавить комментарий, <a href="index.html" id="authorization-link">авторизуйтесь</a></div>`
+            : `<div class="authorization">Чтобы добавить комментарий, <a href="index.html" id="authorization-link" class="authorization-link">авторизуйтесь</a></div>`
         }
 
             <div class="add-form-row">
@@ -247,8 +248,6 @@ const initLikesButtonListeners = (comments, fetchAndRenderComments) => {
             renderComments({ comments, fetchAndRenderComments });
         });
 
-        renderComments({ comments, fetchAndRenderComments });
-        
     }
 
 }
@@ -257,7 +256,7 @@ const initLikesButtonListeners = (comments, fetchAndRenderComments) => {
 
 //        РЕДАКТИРОВАНИЕ КОММЕНТАРИЕВ
 
-const initEditButtonListeners = () => {
+const initEditButtonListeners = (comments, fetchAndRenderComments) => {
 
     if (!token) return;
 
@@ -289,21 +288,27 @@ const initEditButtonListeners = () => {
 
 //        Ответы на комменты
 
-const initEditCommentListeners = () => {
-    const answerElements = document.querySelectorAll(".comment");
+const initEditCommentListeners = (comments, fetchAndRenderComments) => {
 
+    if (!token) return;
+
+    const answerElements = document.querySelectorAll(".comment");
 
     for (const answerElement of answerElements) {
 
         answerElement.addEventListener('click', () => {
 
+
             const index = answerElement.dataset.index;
+
+            console.log(comments[index]);
 
             const text = answerElement.dataset.text;
             const name = answerElement.dataset.name;
 
             // когда нажимаю = &{comment.text} должен появляться в commentInputElement (тексте добавления комментариев)
             // commentInputElement.value = `> ${text} \n ${name}, `;
+
 
             if (comments[index].isEdit === false) {
 
