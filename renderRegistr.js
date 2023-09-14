@@ -36,7 +36,10 @@ export function renderRegister({ fetchAndRenderComments }) {
         register({
             login: loginInputElement.value,
             password: passwordInputElement.value,
-            name: nameRegisterElement.value,
+            // name: nameRegisterElement.value,
+
+            // новая версия с 2.17
+            name: nameRegisterElement.value[0].toUpperCase() + nameRegisterElement.value.slice(1).toLowerCase(),
         })
             .then((responseData) => {
 

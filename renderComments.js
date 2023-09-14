@@ -1,5 +1,6 @@
 import { postComments, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
+
 import { comments, fetchAndRenderComments } from "./main.js";
 
 

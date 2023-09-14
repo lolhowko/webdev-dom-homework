@@ -1,9 +1,10 @@
 import { getComments } from "./api.js";
 import { renderComments } from "./renderComments.js";
-import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
 import { format } from "date-fns";
 
+// старая версия ДАТЫ-формат
+// import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
 //        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
 
