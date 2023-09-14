@@ -1,6 +1,9 @@
 import { register, setToken } from "./api.js";
 import { setName } from "./loginPage.js";
 
+// 2.17 библиотека Lodash - name
+import _ from 'lodash';
+
 
 export function renderRegister({ fetchAndRenderComments }) {
 
@@ -39,7 +42,10 @@ export function renderRegister({ fetchAndRenderComments }) {
             // name: nameRegisterElement.value,
 
             // новая версия с 2.17
-            name: nameRegisterElement.value[0].toUpperCase() + nameRegisterElement.value.slice(1).toLowerCase(),
+            // name: nameRegisterElement.value[0].toUpperCase() + nameRegisterElement.value.slice(1).toLowerCase(),
+
+            // версия с библ Lodash
+            name: _.capitalize(nameRegisterElement.value),
         })
             .then((responseData) => {
 
