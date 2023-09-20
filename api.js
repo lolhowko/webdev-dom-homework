@@ -35,8 +35,7 @@ export function postComments({ name, text }) {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`,
-    const commentsHtml = comments
-},
+        },
         body: JSON.stringify({
             name: name
                 .replaceAll("&", "&amp;")
