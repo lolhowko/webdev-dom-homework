@@ -1,9 +1,0 @@
-{
-    "rules": {
-       "indentation": "tab"
-    },
-    "extends": [
-       "stylelint-config-standard",
-       "stylelint-prettier/recommended"
-    ]
- }
