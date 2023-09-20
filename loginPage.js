@@ -1,13 +1,12 @@
-import { login, setToken, token } from "./api.js";
-import { renderRegister } from './renderRegistr.js';
+import { login, setToken } from "./api.js";
+import { renderRegister } from "./renderRegistr.js";
 
 export function setName(newName) {
     window.userName = newName;
 }
 
-
 export const renderLogin = ({ fetchAndRenderComments }) => {
-    const appElement = document.getElementById('app');
+    const appElement = document.getElementById("app");
 
     const loginHtml = `
     <div class="container">
@@ -28,37 +27,32 @@ export const renderLogin = ({ fetchAndRenderComments }) => {
     </div>
 	`;
 
-
     appElement.innerHTML = loginHtml;
 
-    const registerElement = document.getElementById('register-link');
+    const registerElement = document.getElementById("register-link");
 
-    registerElement?.addEventListener('click', (event) => {
+    registerElement.addEventListener("click", (event) => {
         event.preventDefault();
 
         renderRegister({ fetchAndRenderComments });
     });
 
-
-
     const buttonLoginElement = document.getElementById("login-button");
     const loginInputElement = document.getElementById("login-input");
     const passwordInputElement = document.getElementById("password-input");
 
-    buttonLoginElement.addEventListener('click', () => {
-
+    buttonLoginElement.addEventListener("click", () => {
         login({
             login: loginInputElement.value,
             password: passwordInputElement.value,
         })
             .then((responseData) => {
-
                 setToken(responseData.user.token);
-                localStorage.setItem('tokenSave', responseData.user.token);
+                localStorage.setItem("tokenSave", responseData.user.token);
                 setName(responseData.user.name);
             })
             .then(() => {
                 fetchAndRenderComments();
-            })
+            });
     });
-}
+};

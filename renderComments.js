@@ -1,11 +1,7 @@
 import { postComments, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 
-import { comments, fetchAndRenderComments } from "./main.js";
-
-
-
-const listElement = document.getElementById("list");
+// const listElement = document.getElementById("list");
 
 //      ФОРМАТИРОВАНИЕ ДАТЫ
 
@@ -19,38 +15,46 @@ const listElement = document.getElementById("list");
 //                 date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
 // }
 
-
 // рендер всех комментов + объявление const
 
 export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
     const commentsHtml = comments
         .map((comment, index) => {
-            return `<li class="comment" data-text="${comment.text}" data-name="${comment.name}" data-index="${index}"">
+            return `<li class="comment" data-text="${
+                comment.text
+            }" data-name="${comment.name}" data-index="${index}"">
       <div class="comment-header">
         <div> ${comment.name} </div>
         <div>${comment.date}</div>
       </div>
 
       <div class="comment-body">
-        ${comment.isEdit ? `<textarea class="edit-text" id="textarea-${index}">${comment.text}</textarea>` : `<div class="comment-text">
+        ${
+            comment.isEdit
+                ? `<textarea class="edit-text" id="textarea-${index}">${comment.text}</textarea>`
+                : `<div class="comment-text">
           ${comment.text}
-        </div>`}
+        </div>`
+        }
       </div>
 
       <div class="comment-footer">
         <div class="likes">
           <span class="likes-counter">${comment.like}</span>
-          <button class="like-button ${comment.isLiked ? '-active-like' : ''}" data-index="${index}"></button>
+          <button class="like-button ${
+              comment.isLiked ? "-active-like" : ""
+          }" data-index="${index}"></button>
         </div>
       </div>
 
       <div class="add-form-row">
       <button class="add-form-button edit-comment" data-index="${index}">
-      ${comment.isEdit ? 'Сохранить' : 'Редактировать'} </button>
-    </div>
+      ${comment.isEdit ? "Сохранить" : "Редактировать"} </button>
+        </div>
 
-    </li>`
-        }).join(' ');
+        </li>`;
+        })
+        .join(" ");
 
     const appElement = document.getElementById("app");
 
@@ -66,17 +70,17 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
 
             <div id="container-preloader-post"></div>
 
-            ${token
-            ? `<div class="add-form">
+            ${
+                token
+                    ? `<div class="add-form">
                         <input type="text" class="add-form-name" id="name-input" placeholder="Введите ваше имя" disabled value="${name}" />
                         <textarea type="textarea" class="add-form-text" id="comment-input" placeholder="Введите ваш коментарий" rows="4"></textarea>
                         <div class="add-form-row">
                             <button class="add-form-button" id="add-comment">Написать</button>
                         </div>
                 </div>`
-
-            : `<div class="authorization">Чтобы добавить комментарий, <a href="index.html" id="authorization-link" class="authorization-link">авторизуйтесь</a></div>`
-        }
+                    : `<div class="authorization">Чтобы добавить комментарий, <a href="index.html" id="authorization-link" class="authorization-link">авторизуйтесь</a></div>`
+            }
 
             <div class="add-form-row">
                 <button id="del-comment" class="add-form-button">Удалить последний комментарий</button>
@@ -84,67 +88,76 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
         </div>
         `;
 
-
     appElement.innerHTML = appHTML;
 
-    const authorizationElement = document.getElementById('authorization-link');
+    const authorizationElement = document.getElementById("authorization-link");
 
-    authorizationElement?.addEventListener('click', (event) => {
+    authorizationElement.addEventListener("click", (event) => {
         event.preventDefault();
 
         renderLogin({ comments, fetchAndRenderComments });
     });
 
-
-
     //        ОБЪЯВЛЕНИЕ ВСЕХ CONST
     const buttonAddElement = document.getElementById("add-comment");
     const nameInputElement = document.getElementById("name-input");
     const commentInputElement = document.getElementById("comment-input");
-    const addFormElement = document.querySelector('.add-form');
+    const addFormElement = document.querySelector(".add-form");
 
+    const containerPreloader = document.getElementById("container-preloader");
+    // const containerPreloaderPost = document.getElementById("container-preloader-post");
+    containerPreloader.textContent = "";
 
-    const containerPreloader = document.getElementById('container-preloader');
-    const containerPreloaderPost = document.getElementById('container-preloader-post');
-    containerPreloader.textContent = '';
+    btnElementInit(
+        buttonAddElement,
+        commentInputElement,
+        nameInputElement,
+        addFormElement,
+        fetchAndRenderComments
+    );
 
-    btnElementInit(buttonAddElement, commentInputElement, nameInputElement, addFormElement, fetchAndRenderComments);
-
-
-    initLikesButtonListeners(comments, fetchAndRenderComments, nameInputElement); // ЛАЙКИ initEventListeners
+    initLikesButtonListeners(
+        comments,
+        fetchAndRenderComments,
+        nameInputElement
+    ); // ЛАЙКИ initEventListeners
     initEditButtonListeners(comments, fetchAndRenderComments); // Редактирование коммента = functionEdit
 
     initEditCommentListeners(comments, fetchAndRenderComments); // ОТВЕТЫ на комменты
-}
-
-
+};
 
 //        ПРОВЕРКА НА ЗАПОЛНЕНИЕ ФОРМ + НЕАКТИВНАЯ КНОПКА
 
-
-function btnElementInit(buttonAddElement, commentInputElement, nameInputElement, addFormElement, fetchAndRenderComments) {
-
+function btnElementInit(
+    buttonAddElement,
+    commentInputElement,
+    nameInputElement,
+    addFormElement,
+    fetchAndRenderComments
+) {
     const containerPreloaderPost = document.getElementById(
-        'container-preloader-post',
+        "container-preloader-post"
     );
 
-    buttonAddElement?.addEventListener('click', () => {
-
+    buttonAddElement.addEventListener("click", () => {
         nameInputElement.classList.remove("error");
         commentInputElement.classList.remove("error");
-        buttonAddElement.removeAttribute('disabled', 'disabled');
+        buttonAddElement.removeAttribute("disabled", "disabled");
 
-        if (commentInputElement.value === '' || nameInputElement.value === '') {
-            buttonAddElement.setAttribute('disabled', 'disabled');
+        if (commentInputElement.value === "" || nameInputElement.value === "") {
+            buttonAddElement.setAttribute("disabled", "disabled");
 
-
-            if (commentInputElement.value === '' && nameInputElement.value === '') {
+            if (
+                commentInputElement.value === "" &&
+                nameInputElement.value === ""
+            ) {
                 commentInputElement.classList.add("error");
                 nameInputElement.classList.add("error");
                 return;
-            } if (nameInputElement.value === '') {
+            }
+            if (nameInputElement.value === "") {
                 nameInputElement.classList.add("error");
-                buttonAddElement.setAttribute('disabled', '');
+                buttonAddElement.setAttribute("disabled", "");
                 return;
             } else {
                 commentInputElement.classList.add("error");
@@ -152,10 +165,10 @@ function btnElementInit(buttonAddElement, commentInputElement, nameInputElement,
             }
         }
 
-        addFormElement.classList.add('form-none');
+        addFormElement.classList.add("form-none");
 
         buttonAddElement.disabled = true;
-        buttonAddElement.textContent = 'Комментарий добавляется..';
+        buttonAddElement.textContent = "Комментарий добавляется..";
 
         //        ДОБАВИТЬ С ПОМОЩЬЮ КЛАВИШИ ENTER + ВОЗВРАТ АКТИВНОСТИ КНОПКИ
 
@@ -165,21 +178,17 @@ function btnElementInit(buttonAddElement, commentInputElement, nameInputElement,
             }
         });
 
-        nameInputElement.addEventListener('input', () => {
-
+        nameInputElement.addEventListener("input", () => {
             buttonAddElement.disabled = false;
-            buttonAddElement.style.backgroundColor = '';
-            nameInputElement.classList.remove('error');
+            buttonAddElement.style.backgroundColor = "";
+            nameInputElement.classList.remove("error");
+        });
 
-        })
-
-        commentInputElement.addEventListener('input', () => {
-
+        commentInputElement.addEventListener("input", () => {
             buttonAddElement.disabled = false;
-            buttonAddElement.style.backgroundColor = '';
-            commentInputElement.classList.remove('error');
-
-        })
+            buttonAddElement.style.backgroundColor = "";
+            commentInputElement.classList.remove("error");
+        });
 
         // fetchPromise = addTodo
 
@@ -190,44 +199,41 @@ function btnElementInit(buttonAddElement, commentInputElement, nameInputElement,
                 name: nameInputElement.value, //nameInputElement
                 text: commentInputElement.value, //nameTextAreaElement
             })
-                .then((responseData) => {
+                .then(() => {
                     return fetchAndRenderComments();
                 })
-                .then((data) => {
-                    containerPreloaderPost.textContent = '';
-                    addFormElement.classList.remove('form-none');
-                    nameInputElement.value = '';
-                    commentInputElement.value = '';
+                .then(() => {
+                    containerPreloaderPost.textContent = "";
+                    addFormElement.classList.remove("form-none");
+                    nameInputElement.value = "";
+                    commentInputElement.value = "";
                 })
                 .catch((error) => {
-
-                    containerPreloaderPost.textContent = '';
-                    addFormElement.classList.remove('form-none');
+                    containerPreloaderPost.textContent = "";
+                    addFormElement.classList.remove("form-none");
 
                     if (error.message === "Неверный запрос") {
-                        alert('Короткое имя или текст комментария, минимум 3 символа');
-                    }
-                    else if (error.message === "Ошибка сервера") {
-                        alert('Сломался сервер , попробуйте позже');
+                        alert(
+                            "Короткое имя или текст комментария, минимум 3 символа"
+                        );
+                    } else if (error.message === "Ошибка сервера") {
+                        alert("Сломался сервер , попробуйте позже");
                         fetchPromise();
-                    }
-                    else {
+                    } else {
                         // (window.navigator.onLine === false)
                         // alert('Проблемы с интернетом, проверьте подключение');
                         console.error(error);
                     }
-                })
-        }
+                });
+        };
 
         fetchPromise();
-    })
+    });
 }
 
 //        ОБРАБОТЧИК на LIKES,  РЕАЛИЗАЦИЯ ЛАЙКОВ
 
-
 const initLikesButtonListeners = (comments, fetchAndRenderComments) => {
-
     if (!token) return;
 
     const buttonElements = document.querySelectorAll(".like-button");
@@ -250,21 +256,15 @@ const initLikesButtonListeners = (comments, fetchAndRenderComments) => {
 
             renderComments({ comments, fetchAndRenderComments });
         });
-
     }
-
-}
-
-
+};
 
 //        РЕДАКТИРОВАНИЕ КОММЕНТАРИЕВ
 
 const initEditButtonListeners = (comments, fetchAndRenderComments) => {
-
     if (!token) return;
 
     const buttonEditElements = document.querySelectorAll(".edit-comment");
-
 
     for (const buttonEditElement of buttonEditElements) {
         buttonEditElement.addEventListener("click", (event) => {
@@ -273,35 +273,29 @@ const initEditButtonListeners = (comments, fetchAndRenderComments) => {
             const index = buttonEditElement.dataset.index;
             const textarea = document.getElementById(`textarea-${index}`);
 
-
             if (comments[index].isEdit) {
                 comments[index].isEdit = false;
                 comments[index].text = textarea.value;
 
-                renderComments({ comments, fetchAndRenderComments })
+                renderComments({ comments, fetchAndRenderComments });
             } else {
                 comments[index].isEdit = true;
             }
 
             renderComments({ comments, fetchAndRenderComments });
-        })
+        });
     }
-}
-
+};
 
 //        Ответы на комменты
 
 const initEditCommentListeners = (comments, fetchAndRenderComments) => {
-
     if (!token) return;
 
     const answerElements = document.querySelectorAll(".comment");
 
     for (const answerElement of answerElements) {
-
-        answerElement.addEventListener('click', () => {
-
-
+        answerElement.addEventListener("click", () => {
             const index = answerElement.dataset.index;
 
             console.log(comments[index]);
@@ -309,18 +303,17 @@ const initEditCommentListeners = (comments, fetchAndRenderComments) => {
             const text = answerElement.dataset.text;
             const name = answerElement.dataset.name;
 
+            const commentInputElement =
+                document.getElementById("comment-input");
+
             // когда нажимаю = &{comment.text} должен появляться в commentInputElement (тексте добавления комментариев)
             // commentInputElement.value = `> ${text} \n ${name}, `;
 
-
             if (comments[index].isEdit === false) {
-
                 commentInputElement.value = `BEGIN_QUOTE ${text} ${name} QUOTE_END`;
 
                 renderComments({ comments, fetchAndRenderComments });
-
             }
-
-        })
+        });
     }
-}
+};

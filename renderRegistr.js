@@ -2,12 +2,10 @@ import { register, setToken } from "./api.js";
 import { setName } from "./loginPage.js";
 
 // 2.17 библиотека Lodash - name
-import _ from 'lodash';
-
+import _ from "lodash";
 
 export function renderRegister({ fetchAndRenderComments }) {
-
-    const appElement = document.getElementById('app');
+    const appElement = document.getElementById("app");
 
     const loginHtml = `
 	<div class="container">
@@ -31,9 +29,9 @@ export function renderRegister({ fetchAndRenderComments }) {
     const buttonLoginElement = document.getElementById("login-button");
     const loginInputElement = document.getElementById("login-input");
     const passwordInputElement = document.getElementById("password-input");
-    const nameRegisterElement = document.getElementById('login-name');
+    const nameRegisterElement = document.getElementById("login-name");
 
-    buttonLoginElement.addEventListener('click', () => {
+    buttonLoginElement.addEventListener("click", () => {
         buttonLoginElement.disabled = true;
 
         register({
@@ -48,10 +46,9 @@ export function renderRegister({ fetchAndRenderComments }) {
             name: _.capitalize(nameRegisterElement.value),
         })
             .then((responseData) => {
-
                 setToken(responseData.user.token);
 
-                localStorage.setItem('tokenSave', responseData.user.token);
+                localStorage.setItem("tokenSave", responseData.user.token);
 
                 setName(responseData.user.name);
             })

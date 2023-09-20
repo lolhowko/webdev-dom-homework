@@ -1,17 +1,22 @@
 {
     "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
+      "browser": true,
+      "es6": true,
+      "node": true
     },
     "extends": ["eslint:recommended", "prettier"],
     "plugins": ["prettier"],
     "parserOptions": {
-        "ecmaVersion": 2020
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true
+      }
     },
     "rules": {
-        "prettier/prettier": "error",
-        "camelcase": ["error"],
-        "eqeqeq": ["error", "always"]
+      "prettier/prettier": "error",
+      "camelcase": ["error"],
+      "eqeqeq": "warn"
     }
-}
+  }
+  
