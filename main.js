@@ -3,7 +3,7 @@ import { renderComments } from "./renderComments.js";
 
 import { format } from "date-fns";
 
-// старая версия ДАТЫ-формат
+// старая версия ДАТЫ-форматa
 // import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
 //        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
