@@ -28,10 +28,10 @@ body {
   background:
     radial-gradient(
       75.42% 75.42% at 50% 42.37%,
-      rgba(53, 53, 53, 0) 22.92%,
+      rgb(53 53 53 / 0%) 22.92%,
       #7334ea 100%
     );
-  filter: drop-shadow(0 20px 67px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 20px 67px rgb(0 0 0 / 8%));
   border-radius: 20px;
 }
 
@@ -90,7 +90,7 @@ body {
   transform: scale(1.1);
 }
 
-.-active-like {
+.active-like {
   background-image: url("data:image/svg+xml,%3Csvg width='22' height='20' viewBox='0 0 22 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.95 0C14.036 0 12.199 0.882834 11 2.26703C9.801 0.882834 7.964 0 6.05 0C2.662 0 0 2.6267 0 5.99455C0 10.1035 3.74 13.4714 9.405 18.5613L11 20L12.595 18.5613C18.26 13.4714 22 10.1035 22 5.99455C22 2.6267 19.338 0 15.95 0Z' fill='%23BCEC30'/%3E%3C/svg%3E");
 }
 
@@ -176,7 +176,7 @@ body {
   display: none;
 }
 
-.-loading-like {
+.loading-like {
   animation: rotating 2s linear infinite;
 }
 
@@ -203,7 +203,6 @@ body {
 }
 
 .login-button {
-  margin-top: 10px;
   margin-top: 24px;
   font-size: 24px;
   padding: 10px 20px;

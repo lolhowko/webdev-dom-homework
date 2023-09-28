@@ -42,7 +42,7 @@ export const renderComments = ({ comments, fetchAndRenderComments, name }) => {
         <div class="likes">
           <span class="likes-counter">${comment.like}</span>
           <button class="like-button ${
-              comment.isLiked ? "-active-like" : ""
+              comment.isLiked ? "active-like" : ""
           }" data-index="${index}"></button>
         </div>
       </div>
