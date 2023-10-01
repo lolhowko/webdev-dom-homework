@@ -1,0 +1,35 @@
+{
+  "name": "webdev-dom-homework",
+  "version": "1.0.0",
+  "description": "https://glebkaf.github.io/webdev-dom-homework/",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "format": "prettier --write ./",
+    "lint:js": "eslint ./**/*.js",
+    "lint:css": "stylelint ./**/*.css --fix",
+    "lint": "npm run lint:js && npm run lint:css",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.5.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -26,31 +26,38 @@ export function getComments() {
 
 
 export function postComments({ name, text }) {
-  return fetch(host, {
-    method: "POST",
-    headers: {
-      Authorization: token,
-    },
-    body: JSON.stringify({
-      name: name.replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("QUOTE_BEGIN", "<div class='quote'>")
-        .replaceAll("QUOTE_END", "</div>"),
-      // date: fullDate + fullTime,
-      text: text.replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("QUOTE_BEGIN", "<div class='quote'>")
-        .replaceAll("QUOTE_END", "</div>"),
-      forceError: false,
-    }),
-  })
-    .then((response) => {
-      return response.json();
-    })
+    return fetch(host, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            name: name
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("QUOTE_BEGIN", "<div class='quote'>")
+                .replaceAll("QUOTE_END", "</div>"),
+            // date: fullDate + fullTime,
+            text: text
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("QUOTE_BEGIN", "<div class='quote'>")
+                .replaceAll("QUOTE_END", "</div>"),
+            // forceError: false,
+        }),
+    }).then((response) => {
+        if (response.status === 500) {
+            throw new Error("Ошибка сервера");
+        } else if (response.status === 400) {
+            throw new Error("Неверный запрос!");
+        } else {
+            return response.json();
+        }
+    });
 }
 
 

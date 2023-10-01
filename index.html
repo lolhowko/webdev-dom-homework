@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
@@ -8,39 +8,19 @@
 </head>
 
 
-<body>
-    <div class="container">
-        <div id="container-preloader"></div>
+    <body>
 
-        <ul id="list" class="comments">
+        <div id="app"></div>
 
-            <!-- Список рендерится из JS -->
+        <!-- <script type="module" src="./main.js"></script> -->
 
-        </ul>
+        <!-- новый скрипт с HW 2.17 -->
+        <script src="./dist/main.js"></script>
+    </body>
 
-        <div id="container-preloader-post"></div>
-
-        <div class="add-form">
-            <input type="text" id="name-input" class="add-form-name" placeholder="Введите ваше имя" />
-            <textarea type="textarea" id="comment-input" class="add-form-text" placeholder="Введите ваш коментарий"
-                rows="4"></textarea>
-            <div class="add-form-row">
-                <button id="add-comment" class="add-form-button">Написать</button>
-            </div>
-        </div>
-        <div class="add-form-row">
-            <button id="del-comment" class="add-form-button">Удалить последний комментарий</button>
-        </div>
-    </div>
-
-    <script type="module" src="./main.js"></script>
-
-</body>
-
-<style>
-    .error {
-        background-color: red;
-    }
-</style>
-
+    <style>
+        .error {
+            background-color: red;
+        }
+    </style>
 </html>

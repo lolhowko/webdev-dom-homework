@@ -1,28 +1,20 @@
 import { postComments, getComments } from "./api.js";
 import { renderComments } from "./renderComments.js";
 
+import { format } from "date-fns";
 
-//        ОБЪЯВЛЕНИЕ ВСЕХ CONST
-const buttonAddElement = document.getElementById("add-comment");
-const listElement = document.getElementById("list");
-const nameInputElement = document.getElementById("name-input");
-const commentInputElement = document.getElementById("comment-input");
-const buttonDelComment = document.getElementById("del-comment");
-const addFormElement = document.querySelector('.add-form');
+// старая версия ДАТЫ-форматa
+// import { formatDateToRu } from "./lib/formatDate/formatDate.js";
 
+//        ФОРМИРОВАНИЕ НОВОГО СПИСКА КОММЕНТОВ из хранилища данных
 
-const myDate = new Date().toLocaleDateString().slice(0, 6) + new Date().toLocaleDateString().slice(-2);
-const nowDate = myDate + ' ' + new Date().toLocaleTimeString().slice(0, -3);
+export let comments = [];
 
-const containerPreloader = document.getElementById('container-preloader');
-const containerPreloaderPost = document.getElementById('container-preloader-post');
+// const RUDate = Intl.DateTimeFormat();
 
+//      GET запрос
 
-containerPreloader.textContent = 'Пожалуйста подождите, загружаю комментарии...';
-
-//      GET
-
-const fetchAndRenderComments = () => {
+export const fetchAndRenderComments = () => {
     getComments().then((responseData) => {
 
         const appComments = responseData.comments.map((comment) => {
